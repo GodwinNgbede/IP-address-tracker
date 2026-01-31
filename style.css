@@ -32,8 +32,8 @@ body {
 #ip-form input {
   flex: 1;
   outline: none;
+  width: 100%;
   min-width: 450px;
-
   padding: 12px 22px;
   border: none;
   border-top-left-radius: 0.3rem;
@@ -53,4 +53,13 @@ body {
 }
 #ip-form button:focus {
   outline: none;
+}
+
+@media (max-width: 480px) {
+  .container-input {
+    background: url(./images/pattern-bg-mobile.png);
+  }
+  #ip-form input {
+    min-width: 250px;
+  }
 }
