@@ -11,11 +11,16 @@ function submitAddress(e) {
     alert("enter ip");
   }
 
-  fetch(url).then((response) => {
-    if (!response.ok) {
-      throw new Error("");
-    }
-  });
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP Error! ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    });
 }
 
 formEl.addEventListener("submit", submitAddress);
