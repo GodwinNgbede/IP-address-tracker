@@ -1,15 +1,17 @@
 const formEl = document.getElementById("ip-form");
-const inputEl = document.getElementById("ip").value;
+
 const btnEl = document.getElementById("btn");
 
 function submitAddress(e) {
   e.preventDefault();
 
-  const API_KEY = "at_vQ2nCgFgR98SHYWZdqoubnRehULwR";
-  const url = `https://geo.ipify.org/api/v2/country?apiKey=${API_KEY}&ipAddress=${inputEl || "8.8.8.8"}`;
-  if (inputEl == "") {
-    alert("enter ip");
+  const inputEl = document.getElementById("ip").value.trim();
+  if (inputEl === "") {
+    alert("Enter IP address");
+    return;
   }
+  const API_KEY = "at_vQ2nCgFgR98SHYWZdqoubnRehULwR";
+  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${inputEl}`;
 
   fetch(url)
     .then((response) => {
@@ -20,6 +22,11 @@ function submitAddress(e) {
     })
     .then((data) => {
       console.log(data);
+      const resultEl = document.getElementById("result-display");
+      resultEl.querySelector(".ip").textContent = data.ip;
+      resultEl.querySelector(".location").textContent = data.location.city;
+      resultEl.querySelector(".timezone").textContent = data.location.timezone;
+      resultEl.querySelector(".isp").textContent = data.isp;
     });
 }
 
