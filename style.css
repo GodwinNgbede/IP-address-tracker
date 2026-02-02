@@ -56,8 +56,10 @@ body {
 }
 
 #result-display {
-  position: relative;
-  margin: -3rem auto 0;
+  position: absolute;
+  top: 200px; /* Adjust based on your header height */
+  left: 50%;
+  transform: translateX(-50%);
   width: 90%;
   background: white;
   border-radius: 12px;
@@ -65,7 +67,7 @@ body {
   grid-template-columns: 1fr;
   gap: 1rem;
   padding: 1.5rem;
-  z-index: 50;
+  z-index: 9999;
 }
 
 #result-display p {
