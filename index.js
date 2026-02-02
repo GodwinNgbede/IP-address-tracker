@@ -1,6 +1,19 @@
 const formEl = document.getElementById("ip-form");
 
 const btnEl = document.getElementById("btn");
+// GLOBAL VARIABLE THAT LETS YOU ACCESS THE MAP
+let map;
+let marker;
+
+function showMap() {
+  map = L.map("map").setView([0, 0], 2);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+}
+showMap();
 
 function submitAddress(e) {
   e.preventDefault();
@@ -27,6 +40,13 @@ function submitAddress(e) {
       resultEl.querySelector(".location").textContent = data.location.city;
       resultEl.querySelector(".timezone").textContent = data.location.timezone;
       resultEl.querySelector(".isp").textContent = data.isp;
+      const { lat, lng } = data.location;
+      map.setView([lat, lng], 13);
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
+      marker = L.marker([lat, lng]).addTo(map);
     });
 }
 
